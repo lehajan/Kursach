@@ -12,19 +12,15 @@ class MainController extends Controller
 {
     public function index()
     {
-        $object = Review::find(3);
-        $subscription = $object->trainer;
-        return $subscription;
-    }
-    public function biba()
-    {
-        $object = Trainer::find(1);
-        return $object;
-    }
-    public function boba()
-    {
-        $object = Subscription::find(1);
-        $user = $object->user_id;
-        return $user;
+        $trainers = Trainer::all();
+        $trainers = $trainers->map(function ($trainer) {
+            $reviews = $trainer->reviews->toArray();
+            $reviews = array_slice($reviews, 0, 3);
+            return [
+                'trainer' => $trainer,
+                'reviews' => $reviews
+            ];
+        })->toArray();
+        return $trainers;
     }
 }

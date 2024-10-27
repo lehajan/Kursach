@@ -31,17 +31,24 @@ Route::group([
 
 });
 
-Route::get('index', 'App\Http\Controllers\MainController@index');
-Route::post('reg', 'App\Http\Controllers\RegistrationController@reg');
+Route::get('index', 'App\Http\Controllers\MainController@index')->name('index');
+
+Route::group(['middleware' => 'check.guest'], function(){
+    Route::post('reg', 'App\Http\Controllers\RegistrationController@reg');
+});
 
 
 
 Route::group(['middleware'=>['jwt.auth']], function(){
     Route::get('user/edit', 'App\Http\Controllers\UserController@edit');
     Route::patch('user/update', 'App\Http\Controllers\UserController@update');
+    Route::get('user/reviews', 'App\Http\Controllers\ReviewController@userReviews');
     Route::delete('user/delete', 'App\Http\Controllers\UserController@delete');
 
     Route::get('review/create', 'App\Http\Controllers\ReviewController@create');
     Route::post('review/store', 'App\Http\Controllers\ReviewController@store');
+    Route::patch('review/update/{review}', 'App\Http\Controllers\ReviewController@update');
+    Route::delete('review/delete/{review}', 'App\Http\Controllers\ReviewController@delete');
+
 
 });

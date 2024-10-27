@@ -9,13 +9,13 @@ class Review extends Model
 {
     use HasFactory;
 
-    public function users()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function trainers()
+    public function trainer()
     {
-        return $this->belongsTo(Trainer::class, 'trainer_id', 'id');
+        return $this->belongsTo(Trainer::class, 'trainer_id');
     }
 }

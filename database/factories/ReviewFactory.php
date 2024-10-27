@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Review;
 use App\Models\Trainer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -21,8 +22,8 @@ class ReviewFactory extends Factory
         return [
             'rating' => $this->faker->numberBetween(1,5),
             'comment' => $this->faker->realText(),
-            'trainer_id' => Trainer::get()->random()->id,
             'user_id' => User::get()->random()->id,
+            'trainer_id' => Trainer::get()->random()->id,
         ];
     }
 }

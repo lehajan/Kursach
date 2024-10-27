@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 
+use App\Models\Review;
+use App\Models\Trainer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,6 +23,7 @@ class TrainerFactory extends Factory
             'name' => $this->faker->name(),
             'specialization' => $this->faker->jobTitle(),
             'experience_years' => $this->faker->numberBetween(1, 30),
+
         ];
     }
 }

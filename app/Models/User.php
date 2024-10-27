@@ -10,6 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+
 class User extends Authenticatable implements JWTSubject
 {
 
@@ -63,11 +64,11 @@ class User extends Authenticatable implements JWTSubject
 
     public function reviews()
     {
-        return $this->hasMany(Review::class, 'user_id', 'id');
+        return $this->hasMany(Review::class, 'user_id');
     }
 
-    public function subscription()
+    public function subscriptions()
     {
-        return $this->belongsTo(Subscription::class, 'user_id', 'id');
+        return $this->hasMany(Subscription::class, 'user_id');
     }
 }

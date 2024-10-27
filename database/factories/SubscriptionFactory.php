@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Subscription;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -28,7 +30,7 @@ class SubscriptionFactory extends Factory
                     'годовой с тренером'
                 ]),
             'price' => $this->faker->numberBetween(1000, 10000),
-
+            'user_id' => User::get()->random()->id,
         ];
     }
 }

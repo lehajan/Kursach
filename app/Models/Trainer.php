@@ -9,6 +9,8 @@ class Trainer extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function reviews()
     {
         return $this->hasMany(Review::class, 'trainer_id');

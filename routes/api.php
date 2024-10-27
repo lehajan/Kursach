@@ -32,6 +32,16 @@ Route::group([
 });
 
 Route::get('index', 'App\Http\Controllers\MainController@index');
-Route::get('biba', 'App\Http\Controllers\MainController@biba');
-Route::get('boba', 'App\Http\Controllers\MainController@boba');
+Route::post('reg', 'App\Http\Controllers\RegistrationController@reg');
 
+
+
+Route::group(['middleware'=>['jwt.auth']], function(){
+    Route::get('user/edit', 'App\Http\Controllers\UserController@edit');
+    Route::patch('user/update', 'App\Http\Controllers\UserController@update');
+    Route::delete('user/delete', 'App\Http\Controllers\UserController@delete');
+
+    Route::get('review/create', 'App\Http\Controllers\ReviewController@create');
+    Route::post('review/store', 'App\Http\Controllers\ReviewController@store');
+
+});

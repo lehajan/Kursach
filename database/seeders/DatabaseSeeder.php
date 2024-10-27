@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('admin'),
             'remember_token' => Str::random(10),
+            'is_admin'=>true,
         ]);
         Subscription::factory(10)->create();
         Trainer::factory(3)->create();

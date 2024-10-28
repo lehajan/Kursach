@@ -39,7 +39,7 @@ Route::group(['middleware' => 'check.guest'], function(){
 
 
 
-Route::group(['middleware'=>['jwt.auth']], function(){
+Route::group(['middleware'=>['jwt.auth', 'ban']], function(){
     Route::get('user/edit', 'App\Http\Controllers\UserController@edit');
     Route::patch('user/update', 'App\Http\Controllers\UserController@update');
     Route::get('user/reviews', 'App\Http\Controllers\ReviewController@userReviews');
@@ -47,8 +47,16 @@ Route::group(['middleware'=>['jwt.auth']], function(){
 
     Route::get('review/create', 'App\Http\Controllers\ReviewController@create');
     Route::post('review/store', 'App\Http\Controllers\ReviewController@store');
-    Route::patch('review/update/{review}', 'App\Http\Controllers\ReviewController@update');
+    Route::post('review/update/{review}', 'App\Http\Controllers\ReviewController@update');
     Route::delete('review/delete/{review}', 'App\Http\Controllers\ReviewController@delete');
 
 
+    Route::group(['middleware' => 'admin'], function(){
+        Route::get('admin/users', 'App\Http\Controllers\AdminController@previewUsers');
+        Route::get('admin/reviews', 'App\Http\Controllers\AdminController@previewReviews');
+        Route::post('admin/user/ban/{user}', 'App\Http\Controllers\AdminController@banUser');
+        Route::post('admin/review/delete/{review}', 'App\Http\Controllers\AdminController@deleteReview');
+    });
 });
+
+

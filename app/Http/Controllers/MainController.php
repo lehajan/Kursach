@@ -12,6 +12,7 @@ class MainController extends Controller
 {
     public function index()
     {
+        $subscriptions = Subscription::all();
         $trainers = Trainer::all();
         $trainers = $trainers->map(function ($trainer) {
             $reviews = $trainer->reviews->toArray();
@@ -21,6 +22,7 @@ class MainController extends Controller
                 'reviews' => $reviews
             ];
         })->toArray();
-        return $trainers;
+        return compact('subscriptions', 'trainers');
+
     }
 }

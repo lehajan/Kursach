@@ -6,6 +6,7 @@ use App\Models\Review;
 use App\Models\Trainer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ReviewController extends Controller
 {
@@ -31,6 +32,7 @@ class ReviewController extends Controller
     public function update(Request $request, Review $review)
     {
         $user_id = Auth::id();
+
         $data = $request->validate([
             'rating' => 'required|integer',
             'comment' => 'required|string',
